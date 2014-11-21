@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "save for later",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Save For Later (Chrome Extension) based on http://www.smashingmagazine.com/2014/11/17/creating-save-later-chrome-extension-modern-web-tools/",
+    "description": "The description of the application"
+  }
+}

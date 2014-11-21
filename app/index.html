@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link href="styles/main.css" rel="stylesheet">    
+  </head>
+  <body ng-app="markticle">
+    <div id="main_wrapper" ng-controller="MainController">
+        <header>
+          <h1>My Marks</h1>
+        </header>
+        <section id="my_marks">
+          <ul>
+            <li ng-repeat="mark in marks">
+                <a ng-href="{{mark.url}}">{{mark.title}}</a>
+                <span class="remove" ng-click="removeMark(mark.url)">remove</span>
+            </li>            
+          </ul>
+        </section>
+    </div>
+    
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"/></script>
+
+    
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.controller.js"></script>
+    <script src="scripts/directives/main.directive.js"></script>
+    <script src="scripts/services/storage.service.js"></script>
+    <script src="scripts/helpers/storage.helper.js"></script>
+        
+  </body>
+</html>

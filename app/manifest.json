@@ -1,0 +1,60 @@
+{
+    "name": "Chrome-REPL",
+    "version": "0.0.7",
+    "manifest_version": 2,
+    "description": "Chrome REPL",
+    "icons": {
+        "16": "images/exec.png",
+        "128": "images/exec.png"
+    },
+    "default_locale": "en",
+    "background": {
+        "scripts": [
+            "scripts/helpers/storage.helper.js",
+            "scripts/background.js"
+        ]
+    },
+    "browser_action": {
+        "default_icon": {
+            "19": "images/exec.png",
+            "38": "images/exec.png"
+        },
+        "default_title": "Chrome REPL",
+        "default_popup": "options.html"
+    },
+    "devtools_page": "devtools.html",
+    "options_page": "options.html",
+    "omnibox": {
+        "keyword": "Chrome REPL"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "css": [
+                "styles/main.css"
+            ],
+            "js": [
+                "bower_components/jquery/dist/jquery.js",
+                "scripts/inject.js"
+            ],
+            "run_at": "document_end",
+            "all_frames": false
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "history",
+        "management",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "sandbox": {
+        "pages": [
+            "sandbox.html"
+        ]
+    }
+}
