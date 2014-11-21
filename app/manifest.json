@@ -27,23 +27,6 @@
     "omnibox": {
         "keyword": "Chrome REPL"
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "http://*/*",
-                "https://*/*"
-            ],
-            "css": [
-                "styles/main.css"
-            ],
-            "js": [
-                "bower_components/jquery/dist/jquery.js",
-                "scripts/inject.js"
-            ],
-            "run_at": "document_end",
-            "all_frames": false
-        }
-    ],
     "permissions": [
         "tabs",
         "history",

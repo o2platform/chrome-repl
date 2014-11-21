@@ -1,22 +1,81 @@
 <!doctype html>
-<html>
+<html ng-app='chrome-repl'>
     <head>        
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <link href="bower_components/foundation/css/foundation.css" rel="stylesheet">        
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>                
+        <link href="bower_components/foundation/css/normalize.css" rel="stylesheet">   
+        <link href="bower_components/foundation/css/foundation.css" rel="stylesheet">   
+        <link rel="stylesheet" type="text/css" href="bower_components/codemirror/lib/codemirror.css">
+        
+        <script type="text/javascript" src="bower_components/codemirror/lib/codemirror.js"></script>
+        <script type="text/javascript" src="bower_components/codemirror/mode/javascript//javascript.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
+        
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/code.controller.js"></script>
+        <style>
+            body {min-width: 500px}
+            topbanner  {position:absolute; z-index: 1000; right: 0px}
+        </style>
     </head>
     <body>
          <div class="row">
-            <div class="large-12 columns">
-                <h1><img src='images/O2_Logo.gif' width='70px'/>Chrome REPL</h1>
+            <div_ class="large-12 columns" ng-controller='CodeController'>
+                <topbanner>
+                    <h3>Chrome REPL <img src='images/O2_Logo.gif' width='70px'/></h3>                                       
+                </topbanner>
+                <br/>                
                 
-                <textarea id='code' style='width:500px; height:80px'></textarea>
-                <input type='button' id='execute' value='execute'/>     
-                <pre id='result'></pre>...
-                <br>
+                <div ui-codemirror="cmOption" ng-model="cmModel"></div>                
+                <button class='small success ' id='execute' ng-click='execute()'>Execute (Code above)</button><br/>
+                <!--<textarea id='code' style='width:100pc; height:80px'></textarea>-->
+                
+                <div class="label">Execution result (return value and console.out capture)</div>
+                <pre class="alert-box info" ng-bind='result'></pre>
+                
+                <small>
+                    <a class='small' href='options.html' target='_blank'>open this Javascript REPL page</a> in a new tab
+                </small>
                 <!--<iframe id='iframe'></iframe>-->
-                <script src="scripts/options.js"></script>                
                 
-            </div>
-        </div>                
+                <script src="scripts/options.js"></script>                                
+                <br/>
+                <hr/>
+                <h5>Code examples:</h5>                     
+                    <ul>
+                        <ol>1) open new tab:<pre class='alert-box secondary '>
+chrome.tabs.create({url:'http://www.google.com'}, function(tab) 
+	{
+  		_tab = tab; 
+  		console.log('new tab id is ' + tab.id)
+	})</pre></ol>
+                   
+                    <ol>2) get the object of the new tab created:<pre class='alert-box secondary '>
+chrome.tabs.get(426, function(tab)
+	{
+  		var json = JSON.stringify(tab, null, ' ')
+  		console.log(json)
+	});</pre></ol>
+                   
+                   <ol>3) execute script on google tab<pre class='alert-box secondary '>
+tabId = 426
+code = "alert('hello google tab')"
+chrome.tabs.executeScript(tabId, {code:code});</pre></ol>
+                   <ol>4) inject jQuery in Google tab and submit search form<pre class='alert-box secondary '>
+tabId = 426
+chrome.tabs.executeScript(tabId, {file:'bower_components/jquery/dist/jquery.min.js'})
+code = "$('input').val('Chrome repl').fadeOut().fadeIn();" +
+  	   "document.forms[0].submit()"
+chrome.tabs.executeScript(tabId, {code:code});
+</pre></ol>
+                   <ol>5) change REPL extension icon text (top rigth)<pre class='alert-box secondary '>
+chrome.browserAction.setBadgeText({text: 'TEXT'});
+</pre></ol>
+                </ul>
+                
+                
+
+            </div>                        
+        </div>                            
     </body>
 </html>
