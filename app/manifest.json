@@ -1,6 +1,6 @@
 {
     "name": "Chrome-REPL",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "manifest_version": 2,
     "description": "Chrome REPL",
     "icons": {
@@ -27,13 +27,7 @@
     "omnibox": {
         "keyword": "Chrome REPL"
     },
-    "permissions": [
-        "tabs",
-        "history",
-        "management",
-        "http://*/*",
-        "https://*/*"
-    ],
+    "permissions": [],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "sandbox": {
         "pages": [
